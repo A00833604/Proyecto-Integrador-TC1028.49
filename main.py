@@ -101,7 +101,6 @@ con {ventas_modelos[contador]} ventas')
 
 #5
 def mejor_vendedor(): #Funciona
-    best_seller = ''
     ventas_final = 0
     contador = 0
     for i in range(len(datos_ventas_vendedor)):
