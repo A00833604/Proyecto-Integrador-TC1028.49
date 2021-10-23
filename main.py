@@ -24,7 +24,7 @@ def registrar_venta(): #Funciona
     cantidad_ventas = int(input('Ingresa la cantidad vendida: '))
     
     #ingresa datos del vendedor
-    for i in range(len(nombre_vendedores)):
+    for i in range(len(nombre_vendedor)):
         print(nombre_vendedor[i], end=' ')
     print()
     vendedor = int(input('Vendedor (0, 1, 2): '))
