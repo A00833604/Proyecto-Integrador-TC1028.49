@@ -1,4 +1,4 @@
-#solo falta ponerlo en un mega while loop, (punto 7 y 8)
+from time import sleep #se implementan sleeps despues de la muestra de datos (a partir de la linea 175)
 nombre_vendedor = ['Pablo', 'Julieta', 'Rolando']
 datos_ventas_vendedor = [[0,2,0,1,0,0,0], [1,0,0,0,0,2,3], [0,0,1,2,0,4,0]] #tener datos de los modelos vendidos
 modelos = [17, 22, 80, 15, 12, 44, 32]
@@ -28,20 +28,23 @@ def registrar_venta(): #Funciona
         print(nombre_vendedor[i], end=' ')
     print()
     vendedor = int(input('Vendedor (0, 1, 2): '))
+    incorrecto = False
     for modelo in range(len(cantidad_existencia)):
         if modelo_vendido == modelos[modelo]:
             #checa si la cantidad vendida es mayor a la que esta en existencia
             if (cantidad_existencia[modelo] - int(cantidad_ventas)) < 0:
-                print('Los datos son incorrectos')
+                incorrecto = True
             else:
                 cantidad_existencia[modelo] = cantidad_existencia[modelo] - int(cantidad_ventas)
                 ventas_modelos[modelo] = int(cantidad_ventas)
                 datos_ventas_vendedor[vendedor][modelo] = int(cantidad_ventas)
         elif (cantidad_ventas < 0):
-            print('Los datos son incorrectos')
+            incorrecto = True
             break
         
     if modelo_vendido not in modelos:
+        incorrecto = True
+    if incorrecto:
         print('Los datos son incorrectos')
 
 #2
@@ -124,3 +127,62 @@ def reporte_ventas(): #Funciona
         for x in range(len(datos_ventas_vendedor[i])):
             print(datos_ventas_vendedor[i][x], end=' ')
         print()
+
+#7
+def porcentaje_de_ventas(): #Funciona
+    total_ventas = 0
+    cantidad_cada_vendedor = []
+    for i in range(len(nombre_vendedor)):
+        cantidad_cada_vendedor.append(0)
+        for j in range(len(datos_ventas_vendedor[i])):
+            cantidad_cada_vendedor[i] += datos_ventas_vendedor[i][j]
+            total_ventas += datos_ventas_vendedor[i][j]
+    print("Los porcentajes de cuántos vendió cada vendedor")
+    for i in range(len(cantidad_cada_vendedor)):
+        print(f"{nombre_vendedor[i]} : {cantidad_cada_vendedor[i] / total_ventas * 100 : .2f}% ({cantidad_cada_vendedor[i]}/{total_ventas})")
+
+opcion = 0
+
+while opcion != 8:
+    print("---------------------- Menu ----------------------")
+    print("1. Registrar una venta.")
+    print("2. Registrar llegada de artículos al almacén.")
+    print("3. Consultar el inventario disponible.")
+    print("4. Consultar cuál es el modelo del artículo más vendido.")
+    print("5. Consultar cuál vendedor ha vendido una cantidad mayor de artículos.")
+    print("6. Reporte de ventas de un vendedor.")
+    print("7. Los porcentajes de cuántos vendió cada vendedor.")
+    print("8. Salir")
+    
+    opcion = int(input("Elige tu opción: "))
+    
+    if opcion == 1:
+        registrar_venta()
+    elif opcion == 2:
+        registro_llegada_articulo()
+    elif opcion == 3:
+        consulta_inventario_disponible()
+    elif opcion == 4:
+        articulo_mas_vendido()
+    elif opcion == 5:
+        mejor_vendedor()
+    elif opcion == 6:
+        reporte_ventas()
+    elif opcion == 7:
+        porcentaje_de_ventas()
+    elif opcion != 8:
+        print("Opción inválida")
+    sleep(.5) #el sleep es para que el menu no vengan de inmediato
+    print()
+print("Gracias")
+print()
+sleep(0.5)
+print("Equipo conformado por:")
+sleep(0.5)
+nombres = [['Marco Ottavio Podesta Vezzali, A00822604'], ['Won Huh, A01178010'], ['Valeria Becerra Barraza, A00833860'], ['Montserrat Ballesteros Amador, A01284844']]
+for i in range(len(nombres)):
+    for x in range(len(nombres[i])):
+        for char in nombres[i][x]:
+            sleep(0.018)
+            print(char, end='')
+    print()
